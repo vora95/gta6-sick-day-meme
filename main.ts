@@ -80,6 +80,11 @@ function main(): void {
     "must link the bounty page");
   record("caption-play-code", caption.includes(PLAY_CODE),
     `must carry the play code ${PLAY_CODE}`);
+  // The referral code is NOT a play code (v1's near-miss: the first draft
+  // of the v1 caption used it). Refuse it outright so it can never slip
+  // into the post text through this file.
+  record("caption-no-referral", !caption.includes("05axmjqh"),
+    "the referral code 05axmjqh must never stand in for a play code");
 
   // --- 3. The picture ---------------------------------------------------
   let imageSha = "";
